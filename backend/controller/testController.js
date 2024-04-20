@@ -42,6 +42,16 @@ export const getPatientKidneyTestReports = catchAsyncErrors(async (req, res, nex
   });
 });
 
+// Get a Patient's Test Reports by Doctor
+export const getPatientTestReportsDoctor = catchAsyncErrors(async (req, res, next) => {
+    const testReports = await TestReport.find({ patient: req.params.id, doctor: req.user.id });
+
+    res.status(200).json({
+        success: true,
+        testReports,
+    });
+});
+
 // add a kidney test report
 export const addKidneyTestReport = catchAsyncErrors(async (req, res, next) => {
   const {
