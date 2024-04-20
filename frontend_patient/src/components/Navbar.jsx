@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ import { Context } from "../main";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const location = useLocation();
 
   const handleLogout = async () => {
     await axios
@@ -31,9 +32,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={"container"}>
+      <nav className={location.pathname === '/dashboard' ? 'hidden container' : 'container'}>
         <div className="logo">
-          
           <Link to={"/"} onClick={() => setShow(!show)}>
             <img src="/logo.png" alt="logo" className="logo-img" />
           </Link>

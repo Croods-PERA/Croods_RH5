@@ -22,8 +22,8 @@ body {
   background: #e5e5e5;
   padding: 40px;
   height: 100vh;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
+  /* border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px; */
 }
 @media (max-width: 1208px) {
   .page {
@@ -211,7 +211,6 @@ body {
 
 .dashboard .banner:first-child .secondBox form input[type="text"]:focus {
   outline: none;
-  border-color: #3939d9f2;
   border-width: 2px;
 }
 
@@ -410,7 +409,7 @@ body {
   left: 0;
   height: 100%;
   align-items: center;
-  color: #fff;
+  color: #2c2c5af2;
   padding: 70px 0;
 }
 .sidebar svg {
@@ -420,7 +419,7 @@ body {
 }
 .sidebar svg:hover {
   background: #fff;
-  color: #3939d9f2;
+  color: #626282f2;
   border-radius: 8px;
   transition: 0.3s;
   cursor: pointer;
@@ -633,4 +632,7 @@ input[type="time"]:before {
   content: attr(placeholder);
   color: #444;
   margin-right: 0.5em;
+}
+nav.hidden {
+  display: none;
 }
