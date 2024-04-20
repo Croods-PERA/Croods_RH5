@@ -19,21 +19,6 @@ const userSchema = new mongoose.Schema({
     required: [true, "Email Is Required!"],
     validate: [validator.isEmail, "Provide A Valid Email!"],
   },
-  phone: {
-    type: String,
-    required: [true, "Phone Is Required!"],
-    minLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
-    maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
-  },
-  dob: {
-    type: Date,
-    required: [true, "DOB Is Required!"],
-  },
-  gender: {
-    type: String,
-    required: [true, "Gender Is Required!"],
-    enum: ["Male", "Female"],
-  },
   password: {
     type: String,
     required: [true, "Password Is Required!"],
@@ -50,13 +35,35 @@ const userSchema = new mongoose.Schema({
 // Additional fields for Patient
 const patientSchema = new mongoose.Schema({
     ...userSchema.obj,
-    // Add additional fields for Patient here
+  phone: {
+    type: String,
+    required: [true, "Phone Is Required!"],
+    minLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
+    maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
+  },
+  dob: {
+    type: Date,
+    required: [true, "DOB Is Required!"],
+  },
+  gender: {
+    type: String,
+    required: [true, "Gender Is Required!"],
+    enum: ["Male", "Female"],
+  },
+  doctors: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Doctor',
+  }],
   });
   
   // Additional fields for Doctor
   const doctorSchema = new mongoose.Schema({
     ...userSchema.obj,
     // Add additional fields for Doctor here
+    specialization: {
+        type: String,
+        required: [true, "Specialization Is Required!"],
+    }
   });
   
   // Additional fields for Admin
@@ -95,3 +102,10 @@ userSchema.methods.generateJsonWebToken = function () {
 };
 
 export const User = mongoose.model("User", userSchema);
+export const Patient = mongoose.model("Patient", patientSchema);
+export const Doctor = mongoose.model("Doctor", doctorSchema);
+export const Admin = mongoose.model("Admin", adminSchema);
+export const LabAssistant = mongoose.model("LabAssistant", labAssistantSchema);
+export const DataAnalyst = mongoose.model("DataAnalyst", dataAnalystSchema);
+
+// Path: backend/models/userSchema.js
