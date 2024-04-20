@@ -120,18 +120,18 @@ const kidneyTestReportSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    aanemia: {
+    anemia: {
         type: String,
         required: true
     },
-    class: {
+    class_of_ckd: {
         type: String,
         required: true
-    }
+    },
 });
 
 const TestReport = mongoose.model("TestReport", testReportSchema);
 const KidneyTestReport = mongoose.model("KidneyTestReport", kidneyTestReportSchema);
 
-export default TestReport;
+export { TestReport };
 export { KidneyTestReport };
