@@ -10,23 +10,30 @@ config({ path: "./config.env" });
 const HOST = process.env.APP_HOST
 const PORT = process.env.APP_PORT || 5000;
 
+// Connect to MongoDB
+dbConnection();
+
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // test
-
 app.get('/', (req, res) => {
-  res.send('Hello World!');
-})
+  res.status(200).send("Server works!");
+});
 
-// Connect to MongoDB
-dbConnection();
 
 // Define routes and middleware
 
+
+// For request of undefined path
+app.use("*", function (req, res) {
+  res.status(404).send("Can't found this API!");
+});
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on http://${HOST}:${PORT}`);
 });
