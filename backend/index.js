@@ -6,8 +6,6 @@ import cookieParser from "cookie-parser";
 
 import { dbConnection } from "./database/dbConnection.js";
 import { errorMiddleware } from "./middlewares/error.js";
-import setupRoutes from './routes/routes.js';
-// import isAuthenticatedPatient from "./middleware/auth.middleware.js"
 import userRouter from "./router/userRouter.js";
 
 
