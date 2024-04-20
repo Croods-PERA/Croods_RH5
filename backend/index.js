@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
 import { dbConnection } from "./database/dbConnection.js";
+import setupRoutes from './routes/routes.js';
 
 
 config({ path: "./config.env" });
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
 
 
 // Define routes and middleware
-
+setupRoutes(app);
 
 // For request of undefined path
 app.use("*", function (req, res) {
