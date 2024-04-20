@@ -111,12 +111,12 @@ const Dashboard = () => {
                 placeholder="Specialty"
                 value={doctorSpecialty}
                 onChange={(e) => setDoctorSpecialty(e.target.value)}
-              />
-              <button type="submit">Subscribe Doctor</button>
+              /><br></br>
+              <button type="submit">Add Doctor</button>
             </form>
           </div>
           <div className="thirdBox">
-            <p>Subscribed Doctors</p>
+            <p> Doctors</p>
             <h3>10</h3>
           </div>
         </div>

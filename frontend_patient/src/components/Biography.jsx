@@ -5,10 +5,11 @@ const Biography = ({imageUrl}) => {
     <>
       <div className="container biography">
         <div className="banner">
-          <img src={imageUrl} alt="whoweare" />
+          <img src={imageUrl} alt="image" />
         </div>
         <div className="banner">
           <h3>About Us</h3>
+          <br />
           <p>
           HealTrack is your trusted companion on the journey to optimal health.
           Our innovative platform empowers individuals to take control of their
