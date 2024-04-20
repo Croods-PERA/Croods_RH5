@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: [true, "User Role Required!"],
-    enum: ["Patient", "Doctor", "Admin", "Lab_Assistant", "Data_Analyst"],
+    enum: ["Patient", "Doctor", "Admin", "Lab_Assistant", "Data_Analyst", "PHI"],
   },
 });
 
@@ -84,6 +84,11 @@ const patientSchema = new mongoose.Schema({
     // Add additional fields for Data Analyst here
   });
 
+  const phiSchema = new mongoose.Schema({
+    ...userSchema.obj,
+    // Add additional fields for PHI here
+});
+
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
@@ -107,5 +112,6 @@ export const Doctor = mongoose.model("Doctor", doctorSchema);
 export const Admin = mongoose.model("Admin", adminSchema);
 export const LabAssistant = mongoose.model("LabAssistant", labAssistantSchema);
 export const DataAnalyst = mongoose.model("DataAnalyst", dataAnalystSchema);
+export const PHI = mongoose.model("PHI", phiSchema);
 
 // Path: backend/models/userSchema.js
