@@ -1,18 +1,18 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
+import { config } from 'dotenv';
+import { dbConnection } from "./database/dbConnection.js";
 
 const app = express();
+config({ path: "./config.env" });
+
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+dbConnection();
 
 // Define routes and middleware
 
