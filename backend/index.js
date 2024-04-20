@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import { dbConnection } from "./database/dbConnection.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import setupRoutes from './routes/routes.js';
-import isAuthenticatedPatient from "./middleware/auth.middleware.js"
+// import isAuthenticatedPatient from "./middleware/auth.middleware.js"
 import userRouter from "./router/userRouter.js";
 
 
@@ -34,12 +34,12 @@ app.get('/', (req, res) => {
   res.status(200).send("Server works!");
 });
 
-app.get('/protected', isAuth.verifyToken, (req, res) => {
-  // If the middleware function does not end the request-response cycle,
-  // it must call next() to pass control to the next middleware function.
-  // Otherwise, the request will be left hanging.
-  res.json({ message: 'You have accessed a protected route!', userId: req.userId });
-});
+// app.get('/protected', isAuthenticatedPatient.catchAsyncErrors, (req, res) => {
+//   // If the middleware function does not end the request-response cycle,
+//   // it must call next() to pass control to the next middleware function.
+//   // Otherwise, the request will be left hanging.
+//   res.json({ message: 'You have accessed a protected route!', userId: req.userId });
+// });
 
 
 // Define routes and middleware
