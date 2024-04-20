@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import LabEntryDashboard from "./components/LabEntryDashboard";
 
 const App = () => {
 
@@ -11,6 +12,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/lab-entry-dashboard" element={<LabEntryDashboard />} />
       </Routes>
       <ToastContainer position="top-center" />
     </Router>
