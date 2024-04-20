@@ -1,12 +1,10 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { Context } from "../main";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../main"; // Import the Context from the appropriate file
 
 const Login = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -15,31 +13,39 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      await axios
-        .post(
-          "http://localhost:4000/api/v1/user/login",
-          { email, password, confirmPassword, role: "Patient" },
-          {
-            withCredentials: true,
-            headers: { "Content-Type": "application/json" },
-          }
-        )
-        .then((res) => {
-          toast.success(res.data.message);
-          setIsAuthenticated(true);
-          navigateTo("/");
-          setEmail("");
-          setPassword("");
-          setConfirmPassword("");
-        });
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
+    // Temporarily disable backend functionality
+    // try {
+    //   await axios.post(
+    //     "http://localhost:4000/api/v1/user/login",
+    //     { email, password, confirmPassword, role: "Patient" },
+    //     {
+    //       withCredentials: true,
+    //       headers: { "Content-Type": "application/json" },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     toast.success(res.data.message);
+    //     setIsAuthenticated(true);
+    //     navigateTo("/");
+    //     setEmail("");
+    //     setPassword("");
+    //     setConfirmPassword("");
+    //   });
+    // } catch (error) {
+    //   toast.error(error.response.data.message);
+    // }
+
+    // Simulate successful login
+    toast.success("Login successful!");
+    setIsAuthenticated(true);
+    navigateTo("/dashboard"); // Navigate to next page
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   if (isAuthenticated) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/dashboard"} />;
   }
 
   return (
