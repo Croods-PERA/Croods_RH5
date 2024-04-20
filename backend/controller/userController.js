@@ -188,3 +188,39 @@ export const getDoctorProfile = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
+// add a doctor to patients docrots list=> /api/v1/add_doctor
+export const addDoctor = catchAsyncErrors(async (req, res, next) => {
+    const doctor = await Doctor.findById(req.params.id);
+    if (!doctor) {
+        return next(new ErrorHandler("Doctor not found", 404));
+    }
+    const patient = await Patient.findById(req.user.id);
+    if (patient.doctors.includes(req.params.id)) {
+        return next(new ErrorHandler("Doctor already added", 400));
+    }
+    patient.doctors.push(req.params.id);
+    await patient.save();
+    res.status(200).json({
+        success: true,
+        message: "Doctor added successfully",
+    });
+});
+
+// remove a doctor from patients docrots list=> /api/v1/remove_doctor
+export const removeDoctor = catchAsyncErrors(async (req, res, next) => {
+    const doctor = await Doctor.findById(req.params.id);
+    if (!doctor) {
+        return next(new ErrorHandler("Doctor not found", 404));
+    }
+    const patient = await Patient.findById(req.user.id);
+    if (!patient.doctors.includes(req.params.id)) {
+        return next(new ErrorHandler("Doctor not added", 400));
+    }
+    const index = patient.doctors.indexOf(req.params.id);
+    patient.doctors.splice(index, 1);
+    await patient.save();
+    res.status(200).json({
+        success: true,
+        message: "Doctor removed successfully",
+    });
+});
