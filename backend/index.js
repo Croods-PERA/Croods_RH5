@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { dbConnection } from "./database/dbConnection.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import userRouter from "./router/userRouter.js";
+import testRouter from "./router/testRouter.js";
 
 
 config({ path: "./config.env" });
@@ -42,6 +43,8 @@ app.get('/', (req, res) => {
 
 // Define routes and middleware
 app.use("/api/v1/user", userRouter);
+
+app.use("/api/v1/test", testRouter);
 
 // For request of undefined path
 app.use("*", function (req, res) {
