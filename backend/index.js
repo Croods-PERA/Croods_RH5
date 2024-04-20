@@ -1,9 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
+import cookieParser from "cookie-parser";
+
+
 import { dbConnection } from "./database/dbConnection.js";
+import { errorMiddleware } from "./middlewares/error.js";
 import setupRoutes from './routes/routes.js';
-import isAuth from "./middleware/auth.middleware.js"
+// import isAuth from "./middleware/auth.middleware.js"
+import userRouter from "./router/userRouter.js";
 
 
 config({ path: "./config.env" });
@@ -19,6 +24,8 @@ dbConnection();
 const app = express();
 
 app.use(cors());
+
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,21 +34,23 @@ app.get('/', (req, res) => {
   res.status(200).send("Server works!");
 });
 
-app.get('/protected', isAuth.verifyToken, (req, res) => {
-  // If the middleware function does not end the request-response cycle,
-  // it must call next() to pass control to the next middleware function.
-  // Otherwise, the request will be left hanging.
-  res.json({ message: 'You have accessed a protected route!', userId: req.userId });
-});
+// app.get('/protected', isAuth.verifyToken, (req, res) => {
+//   // If the middleware function does not end the request-response cycle,
+//   // it must call next() to pass control to the next middleware function.
+//   // Otherwise, the request will be left hanging.
+//   res.json({ message: 'You have accessed a protected route!', userId: req.userId });
+// });
 
 
 // Define routes and middleware
-setupRoutes(app);
+app.use("/api/v1/user", userRouter);
 
 // For request of undefined path
 app.use("*", function (req, res) {
   res.status(404).send("Can't found this API!");
 });
+
+app.use(errorMiddleware);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://${HOST}:${PORT}`);
