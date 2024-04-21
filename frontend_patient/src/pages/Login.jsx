@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Context } from "../main"; // Import the Context from the appropriate file
+import axios from "axios"; // Import axios for making requests
 
 const Login = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
