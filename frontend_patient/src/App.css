@@ -21,7 +21,7 @@ body {
   color: #111;
 }
 .purple-btn {
-  background: #9083d5;
+  background: #4d8bff;
   color: #fff;
 }
 p,
@@ -113,18 +113,7 @@ h6 {
   align-items: center;
   overflow-y: hidden;
 }
-.animated-image {
-  animation: moveUpDown 1s infinite alternate ease-in-out;
-}
 
-/* @keyframes moveUpDown {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(20px);
-  }
-} */
 @media (max-width: 1186px) {
   .hero .banner span {
     right: -400px;
@@ -195,7 +184,7 @@ h6 {
   border-radius: 8px;
   font-size: 24px;
   margin-bottom: 30px;
-  background: linear-gradient(140deg, #9083d5, #271776ca);
+  background: #6b57ff;
 }
 .form-component .wrapper {
   display: flex;

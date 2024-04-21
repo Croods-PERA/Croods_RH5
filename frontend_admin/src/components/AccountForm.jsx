@@ -10,11 +10,12 @@ const AccountForm = ({ actionType, onClose }) => {
         e.preventDefault();
         try {
             let response;
-            if (actionType === "createDoctor") {
-                response = await axios.post("/api/createDoctor", formData);
-            } else if (actionType === "deleteDoctor") {
-                response = await axios.delete("/api/deleteDoctor", { data: formData });
+            if (actionType.startsWith("create")) {
+                response = await axios.post(`/api/${actionType}`, formData);
+            } else {
+                response = await axios.delete(`/api/${actionType}`, { data: formData });
             }
+
             // Handle success response
             toast.success(response.data.message);
             // Clear form data after submission
@@ -32,23 +33,24 @@ const AccountForm = ({ actionType, onClose }) => {
     };
 
     const handleClose = (e) => {
-        // Check if the click occurred outside of the modal content
-        if (e.target.className === "modal") {
+        // Check if the click occurred outside of the modal content or its children
+        if (!e.target.closest(".modal-content")) {
             onClose();
         }
     };
-
+    
     return (
         <div className="modal" onClick={handleClose}>
             <div className="modal-content">
-                <span className="close" onClick={onClose}>&times;</span>
                 <form onSubmit={handleFormSubmit}>
                     {/* Render fields based on action type */}
                     {actionType === "createDoctor" && (
                         <>
-                            <input type="text" name="name" placeholder="Doctor Name" onChange={handleChange} />
-                            <input type="text" name="specialty" placeholder="Doctor Specialty" onChange={handleChange} />
-                            {/* Add more fields for creating doctor accounts */}
+                            <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} />
+                            <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
+                            <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+                            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+                            <input type="text" name="specialization" placeholder="Specialization" value={formData.specialization} onChange={handleChange} />
                         </>
                     )}
                     {actionType === "deleteDoctor" && (
@@ -57,8 +59,50 @@ const AccountForm = ({ actionType, onClose }) => {
                             {/* Add more fields for deleting doctor accounts */}
                         </>
                     )}
-                    {/* Add similar conditional rendering for other account types */}
-                    <button type="submit">{actionType === "create" ? "Create Account" : "Delete Account"}</button>
+                    {actionType === "createDataAnalyst" && (
+                        <>
+                            <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} />
+                            <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
+                            <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+                            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+                        </>
+                    )}
+                    {actionType === "deleteDataAnalyst" && (
+                        <>
+                            <input type="text" name="dataAnalystId" placeholder="Data Analyst ID" onChange={handleChange} />
+                            {/* Add more fields for deleting data analyst accounts */}
+                        </>
+                    )}
+                    {actionType === "createLabAssistant" && (
+                        <>
+                            <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} />
+                            <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
+                            <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+                            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+                        </>
+                    )}
+                    {actionType === "deleteLabAssistant" && (
+                        <>
+                            <input type="text" name="labAssistantId" placeholder="Lab Assistant ID" onChange={handleChange} />
+                            {/* Add more fields for deleting doctor accounts */}
+                        </>
+                    )}
+                    {actionType === "createPHI" && (
+                        <>
+                            <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} />
+                            <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
+                            <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+                            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+                        </>
+                    )}
+                    {actionType === "deletePHI" && (
+                        <>
+                            <input type="text" name="PHIId" placeholder="PHI ID" onChange={handleChange} />
+                            {/* Add more fields for deleting data analyst accounts */}
+                        </>
+                    )}
+                    {/* Add similar conditional rendering for other user types */}
+                    <button type="submit">{actionType.startsWith("create") ? "Create Account" : "Delete Account"}</button>
                 </form>
             </div>
         </div>
@@ -66,3 +110,4 @@ const AccountForm = ({ actionType, onClose }) => {
 };
 
 export default AccountForm;
+
