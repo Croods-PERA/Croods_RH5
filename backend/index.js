@@ -9,6 +9,8 @@ import { errorMiddleware } from "./middlewares/error.js";
 import userRouter from "./router/userRouter.js";
 import testRouter from "./router/testRouter.js";
 
+import { createAdmin } from './controller/userController.js';
+
 
 config({ path: "./config.env" });
 
@@ -45,6 +47,18 @@ app.get('/', (req, res) => {
 //   res.json({ message: 'You have accessed a protected route!', userId: req.userId });
 // });
 
+// // Create an admin user
+// const mockRes = {
+//   status: function() {
+//     return this;
+//   },
+//   json: function(obj) {
+//     console.log(obj);
+//     return this;
+//   }
+// };
+
+// createAdmin(null, mockRes).catch(console.error);
 
 // Define routes and middleware
 app.use("/api/v1/user", userRouter);
