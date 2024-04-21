@@ -105,8 +105,14 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center" }}>
-            <p style={{ margin: 0, marginRight: "10px", fontSize: "20px" }}>Already Registered?</p>
+          <div
+            style={{
+              gap: "10px",
+              justifyContent: "flex-end",
+              flexDirection: "row",
+            }}
+          >
+            <p style={{ marginBottom: 0 }}>Already Registered?</p>
             <Link
               to={"/login"}
               style={{ textDecoration: "none", color: "#271776ca" }}
