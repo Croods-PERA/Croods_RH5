@@ -120,6 +120,39 @@ patientSchema.methods.generateJsonWebToken = function () {
   return jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET_KEY);
 };
 
+doctorSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+doctorSchema.methods.generateJsonWebToken = function () {
+  return jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET_KEY);
+}
+
+adminSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+} 
+
+adminSchema.methods.generateJsonWebToken = function () {
+  return jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET_KEY);
+} 
+
+labAssistantSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+} 
+
+labAssistantSchema.methods.generateJsonWebToken = function () {
+  return jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET_KEY);
+}
+
+dataAnalystSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+} 
+
+dataAnalystSchema.methods.generateJsonWebToken = function () {
+  return jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET_KEY);
+}
+
+
 export const User = mongoose.model("User", userSchema);
 export const Patient = mongoose.model("Patient", patientSchema);
 export const Doctor = mongoose.model("Doctor", doctorSchema);
