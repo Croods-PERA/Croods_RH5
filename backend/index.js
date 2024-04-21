@@ -9,7 +9,7 @@ import { errorMiddleware } from "./middlewares/error.js";
 import userRouter from "./router/userRouter.js";
 import testRouter from "./router/testRouter.js";
 
-import { createAdmin } from './controller/userController.js';
+// import { createAdmin } from './controller/userController.js';
 
 
 config({ path: "./config.env" });

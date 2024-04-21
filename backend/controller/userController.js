@@ -10,21 +10,21 @@ import { generateToken } from "../utils/jwtToken.js";
 //     res.status(200).send("HELOOOOO");
 //   };
 
-export const createAdmin = async (req, res) => {
-    const hashedpassword = await bcrypt.hash("admin123", 8);
-    const admin = await Admin.create({
-        firstName: "Admin",
-        lastName: "Admin",
-        email: "admin@croods.pera",
-        password: hashedpassword,
-        role: "Admin",
-    });
-    console.log("Admin created: ", admin);
-    res.status(200).json({
-        success: true,
-        admin,
-    });
-};
+// export const createAdmin = async (req, res) => {
+//     const hashedpassword = await bcrypt.hash("admin123", 8);
+//     const admin = await Admin.create({
+//         firstName: "Admin",
+//         lastName: "Admin",
+//         email: "admin@croods.pera",
+//         password: hashedpassword,
+//         role: "Admin",
+//     });
+//     console.log("Admin created: ", admin);
+//     res.status(200).json({
+//         success: true,
+//         admin,
+//     });
+// };
 
 // Register a Patient => /api/v1/register
 export const registerPatient = catchAsyncErrors(async (req, res, next) => {
