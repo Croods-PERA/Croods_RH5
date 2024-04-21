@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import { User, Patient, Admin, Doctor, LabAssistant, DataAnalyst, PHI } from "../models/userSchema.js";
 import ErrorHandler from "../middlewares/error.js";
@@ -8,6 +10,21 @@ import { generateToken } from "../utils/jwtToken.js";
 //     res.status(200).send("HELOOOOO");
 //   };
 
+// export const createAdmin = async (req, res) => {
+//     const hashedpassword = await bcrypt.hash("admin123", 8);
+//     const admin = await Admin.create({
+//         firstName: "Admin",
+//         lastName: "Admin",
+//         email: "admin@croods.pera",
+//         password: hashedpassword,
+//         role: "Admin",
+//     });
+//     console.log("Admin created: ", admin);
+//     res.status(200).json({
+//         success: true,
+//         admin,
+//     });
+// };
 
 // Register a Patient => /api/v1/register
 export const registerPatient = catchAsyncErrors(async (req, res, next) => {
@@ -19,6 +36,8 @@ export const registerPatient = catchAsyncErrors(async (req, res, next) => {
     if (isRegistered) {
         return next(new ErrorHandler("Email already registered", 400));
     }
+    const hashedpassword = await bcrypt.hash(password, 8);
+    // console.log("Hashed password: ", hashedpassword);
     const patient = await Patient.create({
         firstName,
         lastName,
@@ -26,7 +45,7 @@ export const registerPatient = catchAsyncErrors(async (req, res, next) => {
         phone,
         dob,
         gender,
-        password,
+        password: hashedpassword,
         role: "Patient",
     });
     generateToken(patient, "Patient Registered Successfully!", 201, res);
@@ -42,11 +61,13 @@ export const registerAdmin = catchAsyncErrors(async (req, res, next) => {
     .findOne
     ({ email });
     if (isRegistered) { return next(new ErrorHandler("Email already registered", 400));}
+    const hashedpassword = await bcrypt.hash(password, 8);
+    // console.log("Hashed password: ", hashedpassword);
     const admin = await Admin.create({
         firstName,
         lastName,
         email,
-        password,
+        password: hashedpassword,
         role: "Admin",
     });
     generateToken(admin, "Admin Registered Successfully!", 201, res);
@@ -60,11 +81,13 @@ export const registerDoctor = catchAsyncErrors(async (req, res, next) => {
     }
     const isRegistered = await Doctor.findOne({ email });
     if (isRegistered) { return next(new ErrorHandler("Email already registered", 400));}
+    const hashedpassword = await bcrypt.hash(password, 8);
+    // console.log("Hashed password: ", hashedpassword);
     const doctor = await Doctor.create({
         firstName,
         lastName,
         email,
-        password,
+        password: hashedpassword,
         specialization,
         role: "Doctor",
     });
@@ -79,11 +102,13 @@ export const registerLabAssistant = catchAsyncErrors(async (req, res, next) => {
     }
     const isRegistered = await LabAssistant.findOne({ email });
     if (isRegistered) { return next(new ErrorHandler("Email already registered", 400));}
+    const hashedpassword = await bcrypt.hash(password, 8);
+    // console.log("Hashed password: ", hashedpassword);
     const labAssistant = await LabAssistant.create({
         firstName,
         lastName,
         email,
-        password,
+        password: hashedpassword,
         role: "Lab_Assistant",
     });
     generateToken(labAssistant, "Lab Assistant Registered Successfully!", 201, res);
@@ -97,11 +122,13 @@ export const registerDataAnalyst = catchAsyncErrors(async (req, res, next) => {
     }
     const isRegistered = await DataAnalyst.findOne({ email });
     if (isRegistered) { return next(new ErrorHandler("Email already registered", 400));}
+    const hashedpassword = await bcrypt.hash(password, 8);
+    // console.log("Hashed password: ", hashedpassword);
     const dataAnalyst = await DataAnalyst.create({
         firstName,
         lastName,
         email,
-        password,
+        password: hashedpassword,
         role: "Data_Analyst",
     });
     generateToken(dataAnalyst, "Data Analyst Registered Successfully!", 201, res);
@@ -115,11 +142,13 @@ export const registerPHI = catchAsyncErrors(async (req, res, next) => {
     }
     const isRegistered = await PHI.findOne({ email });
     if (isRegistered) { return next(new ErrorHandler("Email already registered", 400));}
+    const hashedpassword = await bcrypt.hash(password, 8);
+    // console.log("Hashed password: ", hashedpassword);
     const phi = await PHI.create({
         firstName,
         lastName,
         email,
-        password,
+        password: hashedpassword,
         role: "PHI",
     });
     generateToken(phi, "PHI Registered Successfully!", 201, res);
