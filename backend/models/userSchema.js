@@ -106,6 +106,16 @@ userSchema.methods.generateJsonWebToken = function () {
   });
 };
 
+patientSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+patientSchema.methods.generateJsonWebToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
+    expiresIn: process.env.JWT_EXPIRES,
+  });
+};
+
 export const User = mongoose.model("User", userSchema);
 export const Patient = mongoose.model("Patient", patientSchema);
 export const Doctor = mongoose.model("Doctor", doctorSchema);
