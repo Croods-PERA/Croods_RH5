@@ -11,7 +11,11 @@ const AccountForm = ({ actionType, onClose }) => {
         try {
             let response;
             if (actionType.startsWith("create")) {
+                if (actionType === "createLabAssistant") {
+                    response = await axios.post(`http://localhost:4000/api/v1/user/other/register/lab_assistant`, formData);
+                } else {
                 response = await axios.post(`/api/${actionType}`, formData);
+                }
             } else {
                 response = await axios.delete(`/api/${actionType}`, { data: formData });
             }

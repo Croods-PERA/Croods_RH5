@@ -31,10 +31,10 @@ const router = express.Router();
 
 router.post("/patient/register", registerPatient);
 router.post("/other/register/admin", registerAdmin);
-router.post("/other/register/doctor", isAuthenticatedDoctor, registerDoctor);
-router.post("/other/register/lab_assistant", isAuthenticatedLabAssistant, registerLabAssistant);
-router.post("/other/register/data_analyst", isAuthenticatedDataAnalyst, registerDataAnalyst);
-router.post("/other/register/phi", isAuthenticatedPHI, registerPHI);
+router.post("/other/register/doctor", isAuthenticatedAdmin, registerDoctor);
+router.post("/other/register/lab_assistant", isAuthenticatedAdmin, registerLabAssistant);
+router.post("/other/register/data_analyst", isAuthenticatedAdmin, registerDataAnalyst);
+router.post("/other/register/phi", isAuthenticatedAdmin, registerPHI);
 router.post("/patient/login", loginPatient);
 router.post("/other/login", loginOtherUsers);
 router.get("/patient/logout", isAuthenticatedPatient, logoutPatient);
