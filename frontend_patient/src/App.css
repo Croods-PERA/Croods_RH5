@@ -178,13 +178,13 @@ h6 {
 .form-component button {
   padding: 10px 35px;
   color: #fff;
-  font-weight: 700;
+  font-weight: 500;
   width: fit-content;
   border: none;
-  border-radius: 8px;
-  font-size: 24px;
+  border-radius: 30px;
+  font-size: 22px;
   margin-bottom: 30px;
-  background: #6b57ff;
+  background: #4b33ff;
 }
 .form-component .wrapper {
   display: flex;
@@ -205,10 +205,12 @@ h6 {
   margin: 100px auto 20px auto;
   max-width: 800px;
   text-align: center;
+  background-color: #fff;
 }
 .register-form {
   max-width: 1200px;
   margin: 100px auto 20px auto;
+  background-color: #fff;
 }
 .login-form h2 {
   color: #000;

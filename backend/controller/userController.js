@@ -144,23 +144,55 @@ export const loginPatient = catchAsyncErrors(async (req, res, next) => {
 
 // Login Other Users => /api/v2/login
 export const loginOtherUsers = catchAsyncErrors(async (req, res, next) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { email, password, role } = req.body;
+    if (!email || !password || !role) {
         return next(new ErrorHandler("Please fill all fields", 400));
     }
-    const user = await User.findOne({ email }).select("+password");
+    let user;
+    if (role === "Admin") {
+        user = await Admin.findOne({
+            email,
+        }).select("+password");
+    } else if (role === "Doctor") {
+        user = await Doctor.findOne({
+            email,
+        }).select("+password");
+    } else if (role === "Lab_Assistant") {
+        user = await LabAssistant.findOne({
+            email,
+        }).select("+password");
+    } else if (role === "Data_Analyst") {
+        user = await DataAnalyst.findOne({
+            email,
+        }).select("+password");
+    }   else if (role === "PHI") {
+        user = await PHI.findOne({
+            email,
+        }).select("+password");
+    }
+
     if (!user) {
-        return next(new ErrorHandler("Invalid Email or Password", 401));
+        return next(new ErrorHandler("Invalid Email, Password or Role", 401));
     }
     const isPasswordMatched = await user.comparePassword(password);
     if (!isPasswordMatched) {
         return next(new ErrorHandler("Invalid Email or Password", 401));
     }
-    const role = user.role;
-    if (role === "Patient"){
-        return next(new ErrorHandler("Visit Patient Log", 401));
+    if (role === "Admin") {
+        generateToken(user, "Admin Logged In Successfully!", 200, res);
     }
-    generateToken(role , "Logged In Successfully!", 200, res);
+    if (role === "Doctor") {
+        generateToken(user, "Doctor Logged In Successfully!", 200, res);
+    }
+    if (role === "Lab_Assistant") {
+        generateToken(user, "Lab Assistant Logged In Successfully!", 200, res);
+    }
+    if (role === "Data_Analyst") {
+        generateToken(user, "Data Analyst Logged In Successfully!", 200, res);
+    }
+    if (role === "PHI") {
+        generateToken(user, "PHI Logged In Successfully!", 200, res);
+    }
 });
 
 // Logout => /api/v1/logout
