@@ -53,5 +53,6 @@ router.get("/other/profile", isAuthenticatedAdmin ||
 router.get("/patient/mydoctor_profile", isAuthenticatedPatient, getDoctorProfile);
 router.post("/other/admin/add_doctor", isAuthenticatedAdmin, addDoctor);
 router.delete("/other/admin/remove_doctor", isAuthenticatedAdmin, removeDoctor);
+// router.get("/test/test", returnString);
 
 export default router;
