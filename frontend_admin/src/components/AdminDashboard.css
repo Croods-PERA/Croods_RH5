@@ -1,0 +1,122 @@
+/* AdminDashboard.css */
+.admin-dashboard-container {
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.button-box {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.button-group1 {
+    width: calc(50% - 10px);
+    height: 200px;
+    background-color: #ffe7e7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group1 button {
+    display: block;
+    width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.button-group1 button:hover {
+    background-color: #0056b3;
+}
+
+.button-group2 {
+    width: calc(50% - 10px);
+    height: 200px;
+    background-color: #eed3ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group2 button {
+    display: block;
+    width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.button-group2 button:hover {
+    background-color: #0056b3;
+}
+
+.button-group3 {
+    width: calc(50% - 10px); 
+    height: 200px;
+    background-color: #ade4c8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group3 button {
+    display: block;
+    width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.button-group3 button:hover {
+    background-color: #0056b3;
+}
+
+.button-group4{
+    width: calc(50% - 10px);
+    height: 200px;
+    background-color: #faffd4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group4 button {
+    display: block;
+    width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.button-group4 button:hover {
+    background-color: #0056b3;
+}
