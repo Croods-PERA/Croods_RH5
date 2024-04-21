@@ -27,5 +27,4 @@ router.get("/patient/:id/kidney_test_reports", isAuthenticatedPatient, getPatien
 router.post("/other/kidney_test_report", isAuthenticatedLabAssistant, addKidneyTestReport);
 router.get("/other/patient/:id/test_reports", isAuthenticatedDoctor, getPatientTestReportsDoctor);
 
-
 export default router;

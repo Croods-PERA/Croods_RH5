@@ -7,7 +7,6 @@ const Login = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigateTo = useNavigate();
 
@@ -15,8 +14,8 @@ const Login = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:4000/api/v1/user/login",
-        { email, password, confirmPassword, role: "Patient" },
+        "http://localhost:4000/api/v1/user/patient/login",
+        { email, password },
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
@@ -28,11 +27,15 @@ const Login = () => {
         navigateTo("/dashboard");
         setEmail("");
         setPassword("");
-        setConfirmPassword("");
       });
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred");
+      }
     }
+    
 
     // Simulate successful login
     // toast.success("Login successful!");
@@ -64,12 +67,6 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <div
             style={{
