@@ -110,10 +110,14 @@ patientSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
+// patientSchema.methods.generateJsonWebToken = function () {
+//   // console.log(process.env.JWT_EXPIRES);
+//   return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
+//     expires: process.env.JWT_EXPIRES,
+//   });
+// };
 patientSchema.methods.generateJsonWebToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: process.env.JWT_EXPIRES,
-  });
+  return jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET_KEY);
 };
 
 export const User = mongoose.model("User", userSchema);
