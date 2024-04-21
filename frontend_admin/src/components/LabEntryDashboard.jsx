@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./LabEntryDashboard.css";
 
 const LabEntryDashboard = () => {
@@ -6,7 +8,6 @@ const LabEntryDashboard = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState(null);
-    const [testId, setTestId] = useState("");
     const [testResult, setTestResult] = useState(""); // You may need more state variables for test results fields
 
     // Function to handle search
@@ -40,10 +41,31 @@ const LabEntryDashboard = () => {
     };
 
     // Function to handle submitting test results
-    const handleSubmitTestResults = () => {
-        // Implement functionality to submit test results
-        // For now, we'll just log them to the console
-        console.log("Test Results:", testResult);
+    const handleSubmitTestResults = async () => {
+        try {
+            // Assuming test results are stored in an object
+            const testResultsData = {
+                testId: selectedPatient.id, // Assuming testId is stored in the patient object
+                testResults: testResult // Assuming testResult is a string containing the test results
+                // Add more fields if needed
+            };
+
+            // Send a POST request to the backend API to submit test results
+            const response = await axios.post(
+                "http://localhost:4000/api/submit-test-results",
+                testResultsData,
+                { withCredentials: true } // Add credentials if needed
+            );
+
+            // Display success message using Toastify
+        toast.success("Test Results submitted successfully");
+        // Optionally, reset the test result state
+        setTestResult("");
+    } catch (error) {
+        // Display error message using Toastify
+        toast.error("Error submitting test results");
+        console.error("Error submitting test results:", error);
+        }
     };
 
     return (

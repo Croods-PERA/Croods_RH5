@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import LabEntryDashboard from "./components/LabEntryDashboard";
+import AdminDashboard from "./components/AdminDashboard";
 
 const App = () => {
 
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/lab-entry-dashboard" element={<LabEntryDashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
       <ToastContainer position="top-center" />
     </Router>

@@ -3,6 +3,12 @@ import { User, Patient, Admin, Doctor, LabAssistant, DataAnalyst, PHI } from "..
 import ErrorHandler from "../middlewares/error.js";
 import { generateToken } from "../utils/jwtToken.js";
 
+// Test
+// export const returnString = (req, res) => {
+//     res.status(200).send("HELOOOOO");
+//   };
+
+
 // Register a Patient => /api/v1/register
 export const registerPatient = catchAsyncErrors(async (req, res, next) => {
     const { firstName, lastName, email, phone, dob, gender, password } = req.body;
