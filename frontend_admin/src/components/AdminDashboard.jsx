@@ -9,6 +9,10 @@ const AdminDashboard = () => {
         setSelectedOption(option);
     };
 
+    const handleCloseModal = () => {
+        setSelectedOption(null); // Set selectedOption to null to close the modal
+    };
+
     return (
         <section className="container entry-component">
             <img src="/logo.png" alt="logo" className="logo" />
@@ -21,12 +25,12 @@ const AdminDashboard = () => {
                         <button onClick={() => handleOptionClick("deleteDoctor")}>Delete Doctor Account</button>
                     </div>
                     <div className="button-group2">
-                        <button onClick={() => handleOptionClick("createDataanalyst")}>Create Data Analyst Account</button>
+                        <button onClick={() => handleOptionClick("createDataAnalyst")}>Create Data Analyst Account</button>
                         <button onClick={() => handleOptionClick("deleteDataAnalyst")}>Delete Data Analyst Account</button>
                     </div>
                     <div className="button-group3">
-                        <button onClick={() => handleOptionClick("createLabAssist")}>Create Lab Assistant Account</button>
-                        <button onClick={() => handleOptionClick("deleteLabAssist")}>Delete Lab Assistant Account</button>
+                        <button onClick={() => handleOptionClick("createLabAssistant")}>Create Lab Assistant Account</button>
+                        <button onClick={() => handleOptionClick("deleteLabAssistant")}>Delete Lab Assistant Account</button>
                     </div>
                     <div className="button-group4">
                         <button onClick={() => handleOptionClick("createPHI")}>Create PHI Account</button>
@@ -34,7 +38,8 @@ const AdminDashboard = () => {
                     </div>
                 </div>
                 <div className="form-container">
-                    {selectedOption && <AccountForm actionType={selectedOption} />}
+                    {/* Pass the correct actionType for each option */}
+                    {selectedOption && <AccountForm actionType={selectedOption} onClose={handleCloseModal} />}
                 </div>
             </div>
         </section>
