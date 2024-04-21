@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import { User, Patient, Admin, Doctor, LabAssistant, DataAnalyst, PHI } from "../models/userSchema.js";
 import ErrorHandler from "../middlewares/error.js";
@@ -19,6 +21,8 @@ export const registerPatient = catchAsyncErrors(async (req, res, next) => {
     if (isRegistered) {
         return next(new ErrorHandler("Email already registered", 400));
     }
+    const hashedpassword = await bcrypt.hash(password, 8);
+    console.log("Hashed password: ", hashedpassword);
     const patient = await Patient.create({
         firstName,
         lastName,
@@ -26,7 +30,7 @@ export const registerPatient = catchAsyncErrors(async (req, res, next) => {
         phone,
         dob,
         gender,
-        password,
+        password: hashedpassword,
         role: "Patient",
     });
     generateToken(patient, "Patient Registered Successfully!", 201, res);
