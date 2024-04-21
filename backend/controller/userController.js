@@ -1,5 +1,5 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
-import { User, Patient, Doctor, LabAssistant, DataAnalyst, PHI } from "../models/userSchema.js";
+import { User, Patient, Admin, Doctor, LabAssistant, DataAnalyst, PHI } from "../models/userSchema.js";
 import ErrorHandler from "../middlewares/error.js";
 import { generateToken } from "../utils/jwtToken.js";
 
@@ -24,6 +24,26 @@ export const registerPatient = catchAsyncErrors(async (req, res, next) => {
         role: "Patient",
     });
     generateToken(patient, "Patient Registered Successfully!", 201, res);
+});
+
+// Register an Admin => /api/v2/register_admin
+export const registerAdmin = catchAsyncErrors(async (req, res, next) => {
+    const { firstName, lastName, email, password } = req.body;
+    if (!firstName || !lastName || !email || !password) {
+        return next(new ErrorHandler("Please fill all fields", 400));
+    }
+    const isRegistered = await Admin
+    .findOne
+    ({ email });
+    if (isRegistered) { return next(new ErrorHandler("Email already registered", 400));}
+    const admin = await Admin.create({
+        firstName,
+        lastName,
+        email,
+        password,
+        role: "Admin",
+    });
+    generateToken(admin, "Admin Registered Successfully!", 201, res);
 });
 
 // Register a Doctor => /api/v2/register_doctor

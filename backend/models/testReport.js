@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import autoIncrement from "mongoose-auto-increment";
 
 const testReportSchema = new mongoose.Schema({
     testId: {
@@ -18,17 +17,10 @@ const testReportSchema = new mongoose.Schema({
     testType: {
         type: String,
         required: true,
-        enum : ["Kidnaey", "Other"]
+        enum : ["Kidney", "Other"]
     },
 });
 
-// Add the auto-increment plugin to the schema
-testReportSchema.plugin(autoIncrement.plugin, {
-    model: "TestReport",
-    field: "testId",
-    startAt: 1, // The starting test ID
-    incrementBy: 1 // The increment value for each new test
-});
 
 const kidneyTestReportSchema = new mongoose.Schema({
     ...testReportSchema.obj,
