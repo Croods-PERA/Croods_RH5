@@ -43,7 +43,6 @@ app.get('/', (req, res) => {
 
 // Define routes and middleware
 app.use("/api/v1/user", userRouter);
-
 app.use("/api/v1/test", testRouter);
 
 // For request of undefined path
