@@ -18,17 +18,18 @@ const Login = () => {
     try {
       // Temporarily removed axios request
       // Replace this with your backend authentication logic
-      // const res = await axios.post(
-      //   "http://localhost:4000/api/v1/user/login",
-      //   { email, password, confirmPassword },
-      //   {
-      //     withCredentials: true,
-      //     headers: { "Content-Type": "application/json" },
-      //   }
-      // );
+      const res = await axios.post(
+        "http://localhost:4000/api/v1/user/other/login",
+        { email, password, confirmPassword },
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      ;
 
       // Simulating successful login
-      const res = { data: { message: "Login successful" } };
+      // const res = { data: { message: "Login successful" } };
 
       toast.success(res.data.message);
       setIsAuthenticated(true);
