@@ -129,7 +129,7 @@ X_test_np = X_test.to_numpy()  # Convert X_test to numpy array
 import joblib
 
 # Export the model to joblib file
-file_name = 'Kidney_Prediction_Model.joblib'
+file_name = 'Model\\Kidney_Prediction_Model.joblib'
 joblib.dump(etc, file_name)
 
 '''# To load the model back from joblib file
