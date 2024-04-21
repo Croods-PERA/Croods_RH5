@@ -20,7 +20,6 @@
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.2",
-    "mongoose-auto-increment": "^5.0.1",
     "validator": "^13.11.0"
   }
 }
