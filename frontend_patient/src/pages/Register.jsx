@@ -23,7 +23,7 @@ const Register = () => {
       await axios
         .post(
           "http://localhost:4000/api/v1/user/patient/register",
-          { firstName, lastName, email, phone, nic, dob, gender, password },
+          { firstName, lastName, email, phone, dob, gender, password },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
@@ -47,7 +47,7 @@ const Register = () => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/login"} />;
   }
 
   return (

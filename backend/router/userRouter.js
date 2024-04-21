@@ -29,8 +29,8 @@ import{
 
 const router = express.Router();
 
-router.post("/patient/register", isAuthenticatedPatient, registerPatient);
-router.post("/other/register/admin", isAuthenticatedAdmin, registerAdmin);
+router.post("/patient/register", registerPatient);
+router.post("/other/register/admin", registerAdmin);
 router.post("/other/register/doctor", isAuthenticatedDoctor, registerDoctor);
 router.post("/other/register/lab_assistant", isAuthenticatedLabAssistant, registerLabAssistant);
 router.post("/other/register/data_analyst", isAuthenticatedDataAnalyst, registerDataAnalyst);
