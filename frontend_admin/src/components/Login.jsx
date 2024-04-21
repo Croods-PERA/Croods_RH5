@@ -20,7 +20,7 @@ const Login = () => {
       // Replace this with your backend authentication logic
       const res = await axios.post(
         "http://localhost:4000/api/v1/user/other/login",
-        { email, password, confirmPassword },
+        { email, password },
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
@@ -35,7 +35,6 @@ const Login = () => {
       setIsAuthenticated(true);
       setEmail("");
       setPassword("");
-      setConfirmPassword("");
 
       // Determine role based on email address
       const emailDomain = email.split("@")[1];
@@ -128,12 +127,6 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           {/* Removed role selection */}
           {/* <select value={role} onChange={(e) => setRole(e.target.value)}> */}
