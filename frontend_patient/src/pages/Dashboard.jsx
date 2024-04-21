@@ -10,51 +10,16 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 import "./Dashboard.css";
 
 const Dashboard = () => {
-  const [appointments, setAppointments] = useState([]);
   const [doctorName, setDoctorName] = useState("");
   const [doctorSpecialty, setDoctorSpecialty] = useState("");
 
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      try {
-        const { data } = await axios.get(
-          "http://localhost:4000/api/v1/appointment/getall",
-          { withCredentials: true }
-        );
-        setAppointments(data.appointments);
-      } catch (error) {
-        setAppointments([]);
-      }
-    };
-    fetchAppointments();
-  }, []);
-
-  const handleUpdateStatus = async (appointmentId, status) => {
-    try {
-      const { data } = await axios.put(
-        `http://localhost:4000/api/v1/appointment/update/${appointmentId}`,
-        { status },
-        { withCredentials: true }
-      );
-      setAppointments((prevAppointments) =>
-        prevAppointments.map((appointment) =>
-          appointment._id === appointmentId
-            ? { ...appointment, status }
-            : appointment
-        )
-      );
-      toast.success(data.message);
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
 
   const handleDoctorSubscription = async (e) => {
     e.preventDefault();
     try {
       // Send doctor subscription request to the backend
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/doctors/subscribe",
+        "http://localhost:4000/api/v1/user/patient/add_doctor",
         { name: doctorName, specialty: doctorSpecialty },
         { withCredentials: true }
       );

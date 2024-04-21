@@ -51,8 +51,8 @@ router.get("/other/profile", isAuthenticatedAdmin ||
                             isAuthenticatedDataAnalyst ||
                             isAuthenticatedPHI, getOtherUsersProfile);
 router.get("/patient/mydoctor_profile", isAuthenticatedPatient, getDoctorProfile);
-router.post("/other/admin/add_doctor", isAuthenticatedAdmin, addDoctor);
-router.delete("/other/admin/remove_doctor", isAuthenticatedAdmin, removeDoctor);
+router.post("/patient/add_doctor", isAuthenticatedPatient, addDoctor);
+router.delete("/patient/remove_doctor", isAuthenticatedPatient, removeDoctor);
 // router.get("/test/test", returnString);
 
 export default router;
